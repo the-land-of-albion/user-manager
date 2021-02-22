@@ -1,6 +1,3 @@
-import { type } from "node:os";
-import { Transform } from "node:stream";
-
 enum Requests {
     GET, POST, PUT, PATCH, DELETE
 }
@@ -11,22 +8,29 @@ export default class Options {
     body?: any;
     headers?: any;
     static fallbackOptions = {
-        "Authorization": "Bearer "+process.env.AUTH,
+        "Authorization": "Bearer "+ "mypassword",
         "Content-Type":"application/json",
-        "Accepts":"application/json"
+        "Accepts":"application/json",
+        "credentials": "include"
     }
     constructor(request: RequestKeys, body?: any, headers?: any){
         this.request = request;
         this.body = body || null;
-        this.headers = headers || null;
+        this.headers = headers || Options.fallbackOptions;
 
-        this.transform()
+        this.transform();
     }
     transform() {
-        return {
-            method: this.request,
-            body: JSON.stringify(this.body),
+        if(this.body){
+            return {
+                method: this.request,
+                body: JSON.stringify(this.body),
+                headers: this.headers
+            }
+        }else{
+            return {method: this.request,
             headers: this.headers
+            }
         }
     }
 } 

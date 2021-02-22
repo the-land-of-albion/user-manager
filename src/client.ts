@@ -7,6 +7,9 @@ import {
 import * as path from "path";
 import IMyClient from "./client.interface";
 import config from "./config";
+import Options from "./util/Options";
+import fetch from "node-fetch";
+import { timeLog } from "node:console";
 class MyClient extends AkairoClient implements IMyClient {
   commandHandler: CommandHandler;
   listenerHandler: ListenerHandler;
@@ -33,9 +36,11 @@ class MyClient extends AkairoClient implements IMyClient {
 
     this.load();
   }
-  start() {
+  
+  async start() {
     this.login(process.env.DISCORD_BOT_TOKEN);
   }
+
   load() {
     this.commandHandler.useInhibitorHandler(this.inhibitorHandler);
     this.inhibitorHandler.loadAll();
