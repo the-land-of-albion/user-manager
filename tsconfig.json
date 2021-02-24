@@ -13,5 +13,5 @@
         "lib": ["es2017", "esnext.asynciterable", "DOM"],
         "moduleResolution": "node"
     },
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules"] s
 }
