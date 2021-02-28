@@ -1,5 +1,5 @@
 import pirateVocabulary from "./languages/pirate.speech";
-import copVocabulary from "../speech/languages/cop.speech";
+import copVocabulary from "./languages/cop.speech";
 import { Vocabulary } from "./speech.interface";
 
 export enum Dialects{

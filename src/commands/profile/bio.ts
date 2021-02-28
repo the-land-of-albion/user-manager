@@ -1,9 +1,9 @@
 import { Command } from "discord-akairo";
 import { Message } from "discord.js";
-import * as fetch from "node-fetch";
-import Options from "../../util/Options";
+import {fetch} from "../../config/fetch"
 import { dialect } from "../../speech";
 import { Args } from "../../speech/speech.interface";
+import config from "../../config";
 
 const args: Args[] = [{id: "bio", type: "string", default: "", prompt: true}]
 class SetBio extends Command {
@@ -24,14 +24,14 @@ class SetBio extends Command {
   }
 
   async exec(message: Message, args: Record<string, any>) {
-    const options = new Options("PUT", {bio: args.bio}).transform()
-    const res: Response = await fetch(
-      `http://localhost:3000/auth/bio/${message.member?.id}`, options
-    );
-    if (!res.ok) {
-      return message.reply("🚨 News Sir! Can't do that.");
-    }
-    return message.reply("🛰️ Finished Sir!");
+    fetch(`${config.api.prefix}/user/${message.member?.id}/bio`, "PATCH", { body: { bio: args.bio }})
+      .then((res) => {
+        if (!res.ok) {
+          return message.reply("🚨 Unfortunately, I can't see you in our database.");
+        }
+        return message.reply("🛰️ Finished Sir!");
+      })
+
   }
 }
 

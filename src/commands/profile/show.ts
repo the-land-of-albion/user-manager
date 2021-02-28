@@ -1,6 +1,7 @@
 import { Command } from "discord-akairo";
 import { Message } from "discord.js";
-import * as fetch from "node-fetch";
+import config from "../../config";
+import {fetch} from "../../config/fetch";
 import Options from "../../util/Options";
 
 class ShowProfile extends Command {
@@ -11,16 +12,20 @@ class ShowProfile extends Command {
   }
 
   async exec(message: Message, args: Record<string, any>) {
-    const options = new Options("GET").transform()
-    const res: Response = await fetch(
-      `http://localhost:3000/auth/user/${message.member?.id}`, options
-    );
-    if (!res.ok) {
-      return message.reply("🚨 News Sir! Can't do that.");
-    }
-    const data = await res.json();
-    message.reply("🛰️ Found some data.");
-    return message.reply(JSON.stringify(data,null, 2));
+    fetch(
+      `${config.api.prefix}/user/${message.member?.id}`, "GET"
+    )
+      .then((res) => {
+        if(!res.ok) throw new Error()
+        return res.json()
+      })
+      .then((user) => {
+        message.reply("🛰️ Found some data.");
+        return message.reply((JSON.stringify(user, null, 2)));
+      })
+      .catch((err) => {
+        return message.reply("🚨 You're not in our database yet.")
+      })
   }
 }
 
