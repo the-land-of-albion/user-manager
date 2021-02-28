@@ -10,6 +10,8 @@ class SetBio extends Command {
   constructor() {
     super("bio", {
       aliases: ["bio"],
+      category: "profile",
+      description: "Sets user's bio. Getting game shows winners bio.",
       args: [{id: "bio", type: "string", default: "", prompt: true}],
       argumentDefaults: {
         prompt: {

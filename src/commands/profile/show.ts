@@ -8,6 +8,8 @@ class ShowProfile extends Command {
   constructor() {
     super("show profile", {
       aliases: ["profile", "show"],
+      category: "profile",
+      description: "Gets user profile"
     });
   }
 

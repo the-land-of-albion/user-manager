@@ -5,7 +5,10 @@ import config from "../../config";
 class Register extends Command {
   constructor() {
     super("register user", {
-      aliases: ["register"],args: [
+      aliases: ["register"],
+      category: "auth",
+      description: "Register an account.",
+      args: [
         { 
           id: "username",
           type: "/^[a-zA-Z0-9$&+,:;=?@#|'<>.^*()%!-]*$/i",
