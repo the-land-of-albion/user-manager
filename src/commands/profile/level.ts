@@ -16,7 +16,7 @@ class GetLvl extends Command {
   }
 
   async exec(message: Message, args: Record<string, any>) {
-    fetch(`${config.api.prefix}/user/${message.member?.id}/level`, "GET")
+    fetch(`${config.api.prefix}/user/${message.member?.id}`, "GET")
       .then((res) => {
         if (!res.ok) {
           return message.reply("🚨 Unfortunately, I can't see you in our database.");
@@ -25,7 +25,7 @@ class GetLvl extends Command {
       })
       .then((data) => {
 
-        return message.reply(` Lvl: ${data}`);
+        return message.reply(`Lvl: ${data.level}\nRank: ${data.title}`);
       })
 
   }
