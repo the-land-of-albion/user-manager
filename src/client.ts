@@ -21,6 +21,7 @@ class MyClient extends AkairoClient implements IMyClient {
       },
       {
         disableMentions: "everyone",
+        presence: {activity: {name: "!auth help", type: "LISTENING"}, status: "online"}
       }
     );
     this.commandHandler = new CommandHandler(this, {
