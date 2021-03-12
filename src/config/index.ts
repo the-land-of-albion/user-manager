@@ -1,12 +1,12 @@
-import {botHavenSpeech} from "@bothaven/common"; 
+import {botHavenSpeech, npcs} from "@bothaven/common"; 
 const dialect = botHavenSpeech.getDialect("Cop");
 const {NODE_ENV} = process.env;
 const prefix = NODE_ENV == "production" ? "!auth" :  "?auth";
 export default {
     bot: {
-        prefix,
-        name: "Lord Hewelet",
-        iconURL: "https://raw.githubusercontent.com/BotHaven/static/main/img/three-wise-men/melchor.png",
+        prefix: prefix, //npcs.bots.LordHewelet.prefix(process.env.NODE_ENV),
+        name: npcs.bots.LordHewelet.name,
+        iconURL: npcs.bots.LordHewelet.avatar,
         dialect
     },
     api: {
