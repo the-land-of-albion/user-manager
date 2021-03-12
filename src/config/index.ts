@@ -5,7 +5,8 @@ const prefix = NODE_ENV == "production" ? "!auth" :  "?auth";
 export default {
     bot: {
         prefix,
-        name: "Sergeant. Auth",
+        name: "Lord Hewelet",
+        iconURL: "https://raw.githubusercontent.com/BotHaven/static/main/img/three-wise-men/melchor.png",
         dialect
     },
     api: {
